@@ -1,0 +1,34 @@
+services:
+  app:
+    build: .
+    container_name: dungeon-explorer-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - dungeon-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/dungeon_db
+      SPRING_DATASOURCE_USERNAME: dungeon_user
+      SPRING_DATASOURCE_PASSWORD: dungeon_pass
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+  mysql:
+    image: mysql:8.4
+    networks:
+      - dungeon-network
+    environment:
+      MYSQL_DATABASE: dungeon_db
+      MYSQL_USER: dungeon_user
+      MYSQL_PASSWORD: dungeon_pass
+      MYSQL_ROOT_PASSWORD: rootpass
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+
+networks:
+  dungeon-network:
+    driver: bridge
