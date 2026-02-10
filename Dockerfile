@@ -1,8 +1,5 @@
-FROM maven:3.9.9-eclipse-temurin-21 AS build
-
-# Set working directory
-WORKDIR /app
-
+11111111111111111111111111111111111111111111
+4444444444444444444444444444444
 # Copy Maven files first (for dependency caching)
 COPY pom.xml .
 COPY mvnw .
